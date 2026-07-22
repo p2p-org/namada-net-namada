@@ -22,7 +22,7 @@ namada_vp_prelude = {path = "../../crates/vp_prelude"}
 proptest = "1.4.0"
 test-log = {version = "0.2.14", default-features = false, features = ["trace"]}
 tracing = "0.1.30"
-tracing-subscriber = {version = "0.3.7", default-features = false, features = ["env-filter", "fmt"]}
+tracing-subscriber = {version = "0.3.20", default-features = false, features = ["env-filter", "fmt"]}
 
 [lib]
 crate-type = ["cdylib"]
