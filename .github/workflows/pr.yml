@@ -27,9 +27,9 @@ jobs:
       - name: Stop if draft
         if: github.event.pull_request.draft == true
         run: exit 1
-      - uses: cargo-bins/cargo-binstall@main
+      - uses: cargo-bins/cargo-binstall@b874e25ea559687bec77e281e9b271aa1367b624 # main
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 50
       - name: Find branch point of the PR
@@ -41,7 +41,7 @@ jobs:
           [[ -z BRANCH_POINT ]] && echo "No branch point" && exit 1
           echo "REF=$BRANCH_POINT" >> $GITHUB_OUTPUT
       - name: Checkout libs maintenance branch
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           ref: ${{ env.MAINT_LIBS_BRANCH }}
       - name: Copy the current folder to be the baseline for semver-checks
@@ -75,14 +75,14 @@ jobs:
           exclude: namada_apps, namada_benchmarks, namada_light_sdk, namada_examples, namada_fuzz
           baseline-root: ../baseline
       - name: Label PR on success
-        uses: actions-ecosystem/action-add-labels@v1
+        uses: actions-ecosystem/action-add-labels@18f1af5e3544586314bbe15c0273249c770b2daf # v1
         if: >-
           ${{ steps.semver.outcome == 'success' &&
               !contains( github.event.pull_request.labels.*.name, 'breaking:consensus') }}
         with: 
           labels: "${{ env.BACKPORT_LIBS_LABEL }}"
       - name: Label PR on failure
-        uses: actions-ecosystem/action-add-labels@v1
+        uses: actions-ecosystem/action-add-labels@18f1af5e3544586314bbe15c0273249c770b2daf # v1
         if: steps.semver.outcome == 'failure'
         with:
           labels: "breaking:api"
@@ -104,9 +104,9 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: checkout_repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: install_rust
-        uses: dtolnay/rust-toolchain@stable
+        uses: dtolnay/rust-toolchain@6bed0761d98439e5a578e2877258200ad565ba87 # stable
       - name: install_cargo_msrv
         if: matrix.build == 'ubuntu'
         run: cargo install cargo-msrv --locked
