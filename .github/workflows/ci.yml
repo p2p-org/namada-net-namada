@@ -47,7 +47,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0
       - name: Check changelog
@@ -63,9 +63,9 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.ROLE }}
@@ -97,9 +97,9 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.ROLE }}
@@ -148,9 +148,9 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.ROLE }}
@@ -165,7 +165,7 @@ jobs:
       - name: Build ${{ matrix.make.name }}
         run: make ${{ matrix.make.command }}
       - name: Upload ${{ matrix.make.name }} artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: ${{ matrix.make.name }}-${{ github.event.pull_request.head.sha || github.sha }}
           path: ${{ matrix.make.files }}
@@ -182,9 +182,9 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.ROLE }}
@@ -197,12 +197,12 @@ jobs:
           path: /root/.cargo
           key: /cache/${{ runner.os }}-${{ github.job }}-${{ hashFiles('**/Cargo.lock') }}-${{ env.NIGHTLY }}
       - name: Download wasm artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-${{ github.event.pull_request.head.sha|| github.sha }}
           path: wasm
       - name: Download wasm-for-tests artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-for-tests-${{ github.event.pull_request.head.sha|| github.sha }}
           path: wasm_for_tests
@@ -212,7 +212,7 @@ jobs:
         env:
           RUSTFLAGS: "-C linker=clang -C link-arg=-fuse-ld=/usr/local/bin/mold"
       - name: Store coverage file artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: wasm-cov-${{ github.event.pull_request.head.sha || github.sha }}
           path: wasm/lcov.info # output of `make test-wasm-with-coverage`
@@ -229,9 +229,9 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.ROLE }}
@@ -247,12 +247,12 @@ jobs:
         id: sccache
         run: sccache --start-server
       - name: Download wasm artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-${{ github.event.pull_request.head.sha|| github.sha }}
           path: wasm
       - name: Download wasm-for-tests artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-for-tests-${{ github.event.pull_request.head.sha|| github.sha }}
           path: wasm_for_tests
@@ -262,7 +262,7 @@ jobs:
         env:
           RUSTFLAGS: "-C linker=clang -C link-arg=-fuse-ld=/usr/local/bin/mold"
       - name: Store coverage file artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: unit-cov-${{ github.event.pull_request.head.sha || github.sha }}
           path: lcov.info # output of `make test-unit-with-coverage`
@@ -281,9 +281,9 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.ROLE }}
@@ -318,9 +318,9 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.ROLE }}
@@ -336,12 +336,12 @@ jobs:
         id: sccache
         run: sccache --start-server
       - name: Download wasm artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-${{ github.event.pull_request.head.sha|| github.sha }}
           path: wasm
       - name: Download wasm-for-tests artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-for-tests-${{ github.event.pull_request.head.sha|| github.sha }}
           path: wasm_for_tests
@@ -351,7 +351,7 @@ jobs:
         env:
           RUSTFLAGS: "-C linker=clang -C link-arg=-fuse-ld=/usr/local/bin/mold"
       - name: Store coverage file artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: integration-cov-${{ github.event.pull_request.head.sha || github.sha }}
           path: lcov.info # output of `make test-integration-with-coverage`
@@ -372,9 +372,9 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.ROLE }}
@@ -390,12 +390,12 @@ jobs:
         id: sccache
         run: sccache --start-server
       - name: Download wasm artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-${{ github.event.pull_request.head.sha|| github.sha }}
           path: wasm
       - name: Download wasm-for-tests artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-for-tests-${{ github.event.pull_request.head.sha|| github.sha }}
           path: wasm_for_tests
@@ -418,9 +418,9 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.ROLE }}
@@ -440,7 +440,7 @@ jobs:
         env:
           RUSTFLAGS: "-C linker=clang -C debug_assertions=true -C link-arg=-fuse-ld=/usr/local/bin/mold"
       - name: Upload binaries
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: binaries-${{ github.event.pull_request.head.sha || github.sha }}
           path: |
@@ -449,7 +449,7 @@ jobs:
             target/release/namadaw
             target/release/namadan
       - name: Upload build timing report
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: build-timings-${{ github.event.pull_request.head.sha || github.sha }}
           path: target/cargo-timings/cargo-timing.html
@@ -480,9 +480,9 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.ROLE }}
@@ -498,17 +498,17 @@ jobs:
         id: sccache
         run: sccache --start-server
       - name: Download wasm artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-${{ github.event.pull_request.head.sha|| github.sha }}
           path: wasm
       - name: Download wasm-for-tests artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-for-tests-${{ github.event.pull_request.head.sha|| github.sha }}
           path: wasm_for_tests
       - name: Download namada binaries
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: binaries-${{ github.event.pull_request.head.sha || github.sha }}
           path: ./target/release/
@@ -541,7 +541,7 @@ jobs:
           INDEX: ${{ matrix.make.index }}
       - name: Upload e2e logs
         if: success() || steps.e2e.conclusion == 'failure' || steps.e2e.conclusion == 'success'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: logs-e2e-${{ matrix.make.index }}-${{ github.event.pull_request.head.sha || github.sha }}
           path: |
@@ -567,22 +567,22 @@ jobs:
 
     steps:
       - name: Download unit coverage artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: unit-cov-${{ github.event.pull_request.head.sha || github.sha }}
           path: unit-cov
       - name: Download integration coverage artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: integration-cov-${{ github.event.pull_request.head.sha || github.sha }}
           path: integration-cov
       - name: Download wasm coverage artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-cov-${{ github.event.pull_request.head.sha || github.sha }}
           path: wasm-cov
       - name: Upload coverage to codecov
-        uses: codecov/codecov-action@v4
+        uses: codecov/codecov-action@b9fd7d16f6d7d1b5d2bec1a2887e65ceed900238 # v4
         with:
           files: integration-cov/lcov.info, unit-cov/lcov.info, wasm-cov/lcov.info
           fail_ci_if_error: true
@@ -597,7 +597,7 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Checkout ledger-namada
         run: |
           echo "Using Namada Ledger App version: v${LEDGER_APP_VERSION}"
@@ -617,7 +617,7 @@ jobs:
           rm -rf cmake-3.28.0-linux-x86_64.tar.gz
           cmake --version
       - name: Install rust
-        uses: actions-rs/toolchain@v1
+        uses: actions-rs/toolchain@16499b5e05bf2e26879000db0c1d13f7e13fa3af # v1
         with:
           toolchain: stable
       - name: Generate test vectors
@@ -642,9 +642,9 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Configure AWS
-        uses: aws-actions/configure-aws-credentials@v4
+        uses: aws-actions/configure-aws-credentials@7474bc4690e29a8392af63c5b98e7449536d5c3a # v4
         with:
           aws-region: ${{ env.AWS_REGION }}
           role-to-assume: ${{ env.ROLE }}
@@ -660,17 +660,17 @@ jobs:
         id: sccache
         run: sccache --start-server
       - name: Download wasm artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-${{ github.event.pull_request.head.sha|| github.sha }}
           path: wasm
       - name: Download wasm-for-tests artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: wasm-for-tests-${{ github.event.pull_request.head.sha|| github.sha }}
           path: wasm_for_tests
       - name: Download namada binaries
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
         with:
           name: binaries-${{ github.event.pull_request.head.sha || github.sha }}
           path: ./target/release/
@@ -709,7 +709,7 @@ jobs:
           RUSTFLAGS: "-C linker=clang -C debug_assertions=true -C link-arg=-fuse-ld=/usr/local/bin/mold"
       - name: Upload e2e logs
         if: success() || steps.e2e.conclusion == 'failure' || steps.e2e.conclusion == 'success'
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: logs-e2e-with-automation-${{ github.event.pull_request.head.sha || github.sha }}
           path: |
